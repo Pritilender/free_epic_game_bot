@@ -16,13 +16,17 @@ end
 
 bot.ready do |_event|
   games = EpicClient.new.free_games
-  message = "Free games are: #{games.map { _1['title'] }.join(', ')}"
 
   bot.servers.each do |_id, server|
-    server.default_channel(true).send_message(message)
+    games.each do |game|
+      server.default_channel(true).send_embed do |embed|
+        embed.title = "💸 #{game.name} is now free!"
+        embed.description = "Quick! Grab it while it lasts!"
+        embed.url = game.url
+        embed.image = Discordrb::Webhooks::EmbedImage.new url: game.cover_image
+      end
+    end
   end
 end
 
-# This method call has to be put at the end of your script, it is what makes the bot actually connect to Discord. If you
-# leave it out (try it!) the script will simply stop and the bot will not appear online.
 bot.run

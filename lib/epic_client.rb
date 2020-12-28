@@ -2,6 +2,7 @@
 
 require "http"
 require "oj"
+require_relative "./epic_game"
 
 class EpicClient
   HttpError = Class.new StandardError
@@ -13,6 +14,7 @@ class EpicClient
   def free_games(time: Time.now)
     request(query: free_games_query(time: time))
       .then { _1.dig("data", "Catalog", "searchStore", "elements") }
+      .then { |games| games.map { EpicGame.from_raw_game _1 } }
   end
 
   private
@@ -38,6 +40,11 @@ class EpicClient
               title
               id
               namespace
+              productSlug
+              keyImages {
+                type
+                url
+              }
               items {
                 id
                 namespace
