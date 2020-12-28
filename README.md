@@ -38,3 +38,9 @@ Bug reports and pull requests are welcome on GitHub at https://github.com/[USERN
 ## License
 
 The gem is available as open source under the terms of the [MIT License](https://opensource.org/licenses/MIT).
+
+## TODO
+
+[] Add some storage so that we're aware of which games have already been reported and which have not
+[] Add Clockwork or some other scheduler that would re-trigger the request
+[] Put on Heroku for public use
