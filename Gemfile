@@ -4,9 +4,16 @@ source "https://rubygems.org"
 
 gem "rake", "~> 12.0"
 
-group :development, :test do
-  gem "rspec", "~> 3.0", require: false
+gem "discordrb"
 
+gem "http"
+
+gem "oj"
+
+gem "dotenv-rails"
+
+group :development, :test do
   gem "rubocop", require: false
-  gem "rubocop-rspec"
+
+  gem "solargraph", require: false
 end
